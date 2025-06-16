@@ -9,6 +9,62 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      listings: {
+        Row: {
+          agent_id: string | null
+          area_m2: number | null
+          bathrooms: number | null
+          bedrooms: number
+          canonical_hash: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          lat: number | null
+          lng: number | null
+          price_eur: number
+          title: string
+          verified: boolean | null
+        }
+        Insert: {
+          agent_id?: string | null
+          area_m2?: number | null
+          bathrooms?: number | null
+          bedrooms: number
+          canonical_hash?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          price_eur: number
+          title: string
+          verified?: boolean | null
+        }
+        Update: {
+          agent_id?: string | null
+          area_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number
+          canonical_hash?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          price_eur?: number
+          title?: string
+          verified?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listings_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -27,6 +83,30 @@ export type Database = {
           email?: string
           id?: string
           role?: string | null
+        }
+        Relationships: []
+      }
+      raw_listings: {
+        Row: {
+          external_id: string
+          id: string
+          imported_at: string | null
+          payload: Json
+          source: string
+        }
+        Insert: {
+          external_id: string
+          id?: string
+          imported_at?: string | null
+          payload: Json
+          source: string
+        }
+        Update: {
+          external_id?: string
+          id?: string
+          imported_at?: string | null
+          payload?: Json
+          source?: string
         }
         Relationships: []
       }
